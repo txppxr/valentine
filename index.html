@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Question For You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0e9 50%, #ffd4e5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating hearts background */
+        body::before,
+        body::after {
+            content: '♥';
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 105, 135, 0.15);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        body::before {
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        body::after {
+            bottom: 20%;
+            right: 20%;
+            font-size: 30px;
+            animation-delay: 5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #d63384;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(214, 51, 132, 0.1);
+        }
+
+        .initial-button {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c94277 100%);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.3);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .initial-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(214, 51, 132, 0.4);
+        }
+
+        .initial-button:active {
+            transform: translateY(-1px);
+        }
+
+        .choice-container {
+            display: none;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        .choice-button {
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.3px;
+        }
+
+        .yes-button {
+            background: linear-gradient(135deg, #ff4757 0%, #d63384 100%);
+            color: white;
+        }
+
+        .yes-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(214, 51, 132, 0.4);
+        }
+
+        .no-button {
+            background: linear-gradient(135deg, #a8dadc 0%, #6cb4b8 100%);
+            color: white;
+        }
+
+        .no-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(168, 218, 220, 0.4);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .initial-button {
+                padding: 18px 40px;
+                font-size: 1.1rem;
+            }
+
+            .choice-button {
+                padding: 15px 35px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reagan</h1>
+        
+        <button class="initial-button" id="initialBtn">
+            I have a question for you.
+        </button>
+
+        <div class="choice-container" id="choiceContainer">
+            <button class="choice-button yes-button" onclick="window.location.href='valentine.html'">
+                What is it?
+            </button>
+            <button class="choice-button no-button" id="noBtn">
+                Sorry, don't care
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const initialBtn = document.getElementById('initialBtn');
+        const choiceContainer = document.getElementById('choiceContainer');
+        const noBtn = document.getElementById('noBtn');
+
+        initialBtn.addEventListener('click', function() {
+            this.style.display = 'none';
+            choiceContainer.style.display = 'flex';
+        });
+
+        noBtn.addEventListener('click', function() {
+            this.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
