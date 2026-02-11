@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: repeating-linear-gradient(
+                90deg,
+                #ffffff 0px,
+                #ffffff 8px,
+                #ffe0e9 8px,
+                #ffe0e9 16px
+            );
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .message-container {
+            text-align: center;
+            z-index: 10;
+            padding: 40px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .couple-photo {
+            max-width: 500px;
+            width: 90%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 40px;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.8);
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            color: #d63384;
+            margin: 0;
+            margin-bottom: 30px;
+            font-weight: 400;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.5s ease;
+        }
+
+        .valentine-button {
+            background: #ffb3d9;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .valentine-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 179, 217, 0.4);
+        }
+
+        .valentine-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Heart confetti */
+        .heart {
+            position: fixed;
+            top: -50px;
+            font-size: 20px;
+            color: #ff6b9d;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 0.4;
+                transform: translateY(0px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Different heart variations */
+        .heart:nth-child(odd) {
+            color: #ff4757;
+        }
+
+        .heart:nth-child(3n) {
+            color: #ff85a2;
+        }
+
+        .heart:nth-child(5n) {
+            color: #d63384;
+            font-size: 30px;
+        }
+
+        .heart:nth-child(7n) {
+            font-size: 25px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <img src="couple.jpg" alt="Us" class="couple-photo">
+        <h1>Will you be my valentine?</h1>
+        <button class="valentine-button" id="startHearts">Yes! ♥</button>
+    </div>
+
+    <script>
+        let heartsStarted = false;
+        let heartInterval;
+
+        // Create falling hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '♥';
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            const duration = Math.random() * 3 + 4; // 4-7 seconds
+            heart.style.animation = `fall ${duration}s linear forwards`;
+            
+            document.body.appendChild(heart);
+
+            // Remove heart after animation completes
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        // Start hearts when button is clicked
+        document.getElementById('startHearts').addEventListener('click', function() {
+            if (!heartsStarted) {
+                heartsStarted = true;
+                
+                const h1 = document.querySelector('h1');
+                const img = document.querySelector('.couple-photo');
+                
+                // Fade out text and image
+                h1.style.opacity = '0';
+                img.style.opacity = '0';
+                
+                // Change text and image after fade out
+                setTimeout(() => {
+                    h1.textContent = 'I love you!';
+                    img.src = 'couple2.jpg';
+                    
+                    // Fade back in
+                    h1.style.opacity = '1';
+                    img.style.opacity = '1';
+                }, 500);
+                
+                // Initial burst of hearts
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(createHeart, i * 150);
+                }
+                
+                // Create hearts continuously
+                heartInterval = setInterval(createHeart, 300);
+                
+                // Hide button after click
+                this.style.opacity = '0';
+                setTimeout(() => {
+                    this.style.display = 'none';
+                }, 300);
+            }
+        });
+    </script>
+</body>
+</html>

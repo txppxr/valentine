@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Question For You</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0e9 50%, #ffd4e5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Decorative hearts */
+        .decorative-heart {
+            position: absolute;
+            font-size: 40px;
+            color: #ff85a2;
+            opacity: 0.3;
+            animation: floatGentle 6s ease-in-out infinite;
+        }
+
+        .heart-1 {
+            top: 15%;
+            left: 10%;
+            font-size: 60px;
+            color: #ffb3d9;
+            opacity: 0.25;
+            animation-delay: 0s;
+        }
+
+        .heart-2 {
+            top: 25%;
+            right: 15%;
+            font-size: 45px;
+            color: #ff6b9d;
+            opacity: 0.2;
+            animation-delay: 2s;
+            transform: rotate(15deg);
+        }
+
+        .heart-3 {
+            bottom: 20%;
+            left: 8%;
+            font-size: 50px;
+            color: #ffc4dd;
+            opacity: 0.3;
+            animation-delay: 1s;
+            transform: rotate(-10deg);
+        }
+
+        .heart-4 {
+            bottom: 15%;
+            right: 12%;
+            font-size: 55px;
+            color: #ff99c2;
+            opacity: 0.25;
+            animation-delay: 3s;
+        }
+
+        /* Lace heart corners */
+        .lace-heart {
+            position: absolute;
+            font-size: 80px;
+            opacity: 0.15;
+            color: #d63384;
+        }
+
+        .lace-top-left {
+            top: 5%;
+            left: 5%;
+            animation: slideInTopLeft 2s ease-out;
+        }
+
+        .lace-top-right {
+            top: 5%;
+            right: 5%;
+            animation: slideInTopRight 2s ease-out;
+            transform: scaleX(-1);
+        }
+
+        .lace-bottom-left {
+            bottom: 5%;
+            left: 5%;
+            animation: slideInBottomLeft 2s ease-out;
+            transform: rotate(180deg);
+        }
+
+        .lace-bottom-right {
+            bottom: 5%;
+            right: 5%;
+            animation: slideInBottomRight 2s ease-out;
+            transform: rotate(180deg) scaleX(-1);
+        }
+
+        @keyframes floatGentle {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg); 
+            }
+            50% { 
+                transform: translateY(-20px) rotate(5deg); 
+            }
+        }
+
+        @keyframes slideInTopLeft {
+            from {
+                transform: translate(-100px, -100px) rotate(-45deg);
+                opacity: 0;
+            }
+            to {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0.15;
+            }
+        }
+
+        @keyframes slideInTopRight {
+            from {
+                transform: translate(100px, -100px) rotate(45deg) scaleX(-1);
+                opacity: 0;
+            }
+            to {
+                transform: translate(0, 0) rotate(0deg) scaleX(-1);
+                opacity: 0.15;
+            }
+        }
+
+        @keyframes slideInBottomLeft {
+            from {
+                transform: translate(-100px, 100px) rotate(135deg);
+                opacity: 0;
+            }
+            to {
+                transform: translate(0, 0) rotate(180deg);
+                opacity: 0.15;
+            }
+        }
+
+        @keyframes slideInBottomRight {
+            from {
+                transform: translate(100px, 100px) rotate(-135deg) scaleX(-1);
+                opacity: 0;
+            }
+            to {
+                transform: translate(0, 0) rotate(180deg) scaleX(-1);
+                opacity: 0.15;
+            }
+        }
+
+        /* Ribbon accents */
+        .ribbon {
+            position: absolute;
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff99c2, transparent);
+            opacity: 0.2;
+        }
+
+        .ribbon-1 {
+            top: 35%;
+            left: -50px;
+            transform: rotate(-15deg);
+            animation: slideInLeft 2.5s ease-out;
+        }
+
+        .ribbon-2 {
+            top: 65%;
+            right: -50px;
+            transform: rotate(15deg);
+            animation: slideInRight 2.5s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                left: -200px;
+                opacity: 0;
+            }
+            to {
+                left: -50px;
+                opacity: 0.2;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                right: -200px;
+                opacity: 0;
+            }
+            to {
+                right: -50px;
+                opacity: 0.2;
+            }
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .initial-button {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c94277 100%);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.3);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .initial-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(214, 51, 132, 0.4);
+        }
+
+        .initial-button:active {
+            transform: translateY(-1px);
+        }
+
+        .choice-container {
+            display: none;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+
+        .choice-button {
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.3px;
+        }
+
+        .yes-button {
+            background: #ffb3d9;
+            color: white;
+        }
+
+        .yes-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(214, 51, 132, 0.4);
+        }
+
+        .no-button {
+            background: white;
+            color: #d63384;
+        }
+
+        .no-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(168, 218, 220, 0.4);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 600px) {
+            .initial-button {
+                padding: 18px 40px;
+                font-size: 1.1rem;
+            }
+
+            .choice-button {
+                padding: 15px 35px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative floating hearts -->
+    <div class="decorative-heart heart-1">♥</div>
+    <div class="decorative-heart heart-2">♥</div>
+    <div class="decorative-heart heart-3">♥</div>
+    <div class="decorative-heart heart-4">♥</div>
+    
+    <!-- Lace heart corners -->
+    <div class="lace-heart lace-top-left">♥</div>
+    <div class="lace-heart lace-top-right">♥</div>
+    <div class="lace-heart lace-bottom-left">♥</div>
+    <div class="lace-heart lace-bottom-right">♥</div>
+    
+    <!-- Ribbon accents -->
+    <div class="ribbon ribbon-1"></div>
+    <div class="ribbon ribbon-2"></div>
+
+    <div class="container">
+        
+        <button class="initial-button" id="initialBtn">
+            I have a question for you.
+        </button>
+
+        <div class="choice-container" id="choiceContainer">
+            <button class="choice-button yes-button" onclick="window.location.href='valentine.html'">
+                WHAT?
+            </button>
+            <button class="choice-button no-button" id="noBtn">
+                Not interested...
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const initialBtn = document.getElementById('initialBtn');
+        const choiceContainer = document.getElementById('choiceContainer');
+        const noBtn = document.getElementById('noBtn');
+
+        initialBtn.addEventListener('click', function() {
+            this.style.display = 'none';
+            choiceContainer.style.display = 'flex';
+        });
+
+        noBtn.addEventListener('click', function() {
+            this.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
