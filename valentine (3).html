@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: repeating-linear-gradient(
+                90deg,
+                #ffffff 0px,
+                #ffffff 8px,
+                #ffe0e9 8px,
+                #ffe0e9 16px
+            );
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .message-container {
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 1s ease;
+        }
+
+        .message-container.split {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            gap: 60px;
+        }
+
+        .left-content {
+            flex: 1;
+            text-align: center;
+            transition: all 1s ease;
+        }
+
+        .right-content {
+            flex: 1;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .right-content.visible {
+            opacity: 1;
+        }
+
+        .invitation-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #d63384;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .invitation-text strong {
+            font-weight: 700;
+        }
+
+        .invitation-line {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .calendar-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: #ffb3d9;
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .calendar-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 179, 217, 0.4);
+        }
+
+        .couple-photo {
+            max-width: 350px;
+            width: 90%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            transition: opacity 0.8s ease;
+        }
+
+        .message-container.split .couple-photo {
+            max-width: 350px;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: scale(0.8);
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: #d63384;
+            margin: 0;
+            margin-bottom: 25px;
+            font-weight: 400;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.8s ease;
+        }
+
+        .valentine-button {
+            background: #ffb3d9;
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-family: 'Crimson Pro', serif;
+            font-weight: 600;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .valentine-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 179, 217, 0.4);
+        }
+
+        .valentine-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Heart confetti */
+        .heart {
+            position: fixed;
+            top: -50px;
+            font-size: 20px;
+            color: #ff6b9d;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 0.4;
+                transform: translateY(0px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Different heart variations */
+        .heart:nth-child(odd) {
+            color: #ff4757;
+        }
+
+        .heart:nth-child(3n) {
+            color: #ff85a2;
+        }
+
+        .heart:nth-child(5n) {
+            color: #d63384;
+            font-size: 30px;
+        }
+
+        .heart:nth-child(7n) {
+            font-size: 25px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .message-container.split {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .invitation-text {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container" id="container">
+        <div class="left-content" id="leftContent">
+            <img src="couple.jpg" alt="Us" class="couple-photo" id="photo">
+            <h1 id="mainText">Will you be my valentine?</h1>
+        </div>
+        <div class="right-content" id="rightContent">
+            <div class="invitation-text">
+                <span class="invitation-line">I invite you to:</span>
+                <span class="invitation-line">A Valentine's Day dinner at <strong>Claude's Bistro and Bar</strong> at 5:15pm!</span>
+                <span class="invitation-line">Look cute!</span>
+            </div>
+            <a href="#" class="calendar-link" id="calendarLink" download="valentines-dinner.ics">Add to Calendar 📅</a>
+        </div>
+        <button class="valentine-button" id="startHearts">Yes! ♥</button>
+    </div>
+
+    <script>
+        let heartsStarted = false;
+        let heartInterval;
+
+        const container = document.getElementById('container');
+        const leftContent = document.getElementById('leftContent');
+        const rightContent = document.getElementById('rightContent');
+        const mainText = document.getElementById('mainText');
+        const photo = document.getElementById('photo');
+        const button = document.getElementById('startHearts');
+
+        // Generate calendar .ics file
+        const calendarEvent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Valentine's Day Dinner//EN
+BEGIN:VEVENT
+UID:${Date.now()}@valentine
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+DTSTART:20260214T171500
+DTEND:20260214T191500
+SUMMARY:Valentine's Day Dinner at Claude's Bistro and Bar
+LOCATION:Claude's Bistro and Bar
+DESCRIPTION:Valentine's Day dinner with my love ♥
+STATUS:CONFIRMED
+SEQUENCE:0
+BEGIN:VALARM
+TRIGGER:-PT1H
+DESCRIPTION:Reminder: Valentine's Day Dinner in 1 hour!
+ACTION:DISPLAY
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+        const calendarLink = document.getElementById('calendarLink');
+        const blob = new Blob([calendarEvent], { type: 'text/calendar;charset=utf-8' });
+        calendarLink.href = URL.createObjectURL(blob);
+
+        // Create falling hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '♥';
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            const duration = Math.random() * 3 + 4; // 4-7 seconds
+            heart.style.animation = `fall ${duration}s linear forwards`;
+            
+            document.body.appendChild(heart);
+
+            // Remove heart after animation completes
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        // Start hearts when button is clicked
+        button.addEventListener('click', function() {
+            if (!heartsStarted) {
+                heartsStarted = true;
+                
+                // Fade out text and image
+                mainText.style.opacity = '0';
+                photo.style.opacity = '0';
+                
+                // Change text and image after fade out
+                setTimeout(() => {
+                    mainText.textContent = 'I love you!';
+                    photo.src = 'couple2.jpg';
+                    
+                    // Fade back in
+                    mainText.style.opacity = '1';
+                    photo.style.opacity = '1';
+                    
+                    // Hide button
+                    button.style.opacity = '0';
+                    setTimeout(() => {
+                        button.style.display = 'none';
+                    }, 300);
+                    
+                    // Wait 3 seconds, then split layout and show invitation
+                    setTimeout(() => {
+                        container.classList.add('split');
+                        
+                        // Show invitation after layout shift
+                        setTimeout(() => {
+                            rightContent.classList.add('visible');
+                            
+                            // Start hearts
+                            for (let i = 0; i < 20; i++) {
+                                setTimeout(createHeart, i * 150);
+                            }
+                            heartInterval = setInterval(createHeart, 300);
+                        }, 1000);
+                    }, 3000);
+                }, 800);
+            }
+        });
+    </script>
+</body>
+</html>
